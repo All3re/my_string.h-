@@ -47,7 +47,7 @@ s21_size_t s21_strlen(const char *str)
 {
     s21_size_t len = 0;
     for(; str[len]; len++);
-    return len + 1;
+    return len;
 } 
 
 
@@ -58,7 +58,7 @@ char* s21_strncat(char *dest, const char *src, size_t n){
     for(; n > 0; n--){
         *dest++ = *src++;
     }
-    //*de = '\0';
+    //*dest = '\0';
     return dest;
 }
 
@@ -86,8 +86,33 @@ int s21_strncmp(const char *str1, const char *str2, size_t n){
             res = str1[i] - str2[i];
             break;
         }
+        if(str1[1] == '\0') break;
     }
     return res;
 }
 
-char *strncpy(char *dest, const char *src, size_t n){}
+char* s21_strncpy(char *dest, const char *src, size_t n){
+    for(; n > 0; n--){
+        if(*src) *dest++ = *src++;
+        else *dest++ = '\0';
+    }
+    return dest;
+}
+
+s21_size_t s21_strcspn(const char *str1, const char *str2){
+    s21_size_t res = 0;
+    s21_size_t ds = 0;
+    s21_size_t i = 0;
+    s21_size_t j = 0;
+    for(; i < s21_strlen(str1) - 1; i++){
+        if(str1[i] == str2[j]) {
+            res = i;
+            break;
+        } 
+        for(; j < s21_strlen(str2) - 1; j++);
+    }
+    ds = i;
+    if(res == 0) res = ds;
+    return res;
+}
+
