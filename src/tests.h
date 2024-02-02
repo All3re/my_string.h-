@@ -20,7 +20,7 @@ Suite *suite_strpbrk(void);
 Suite *suite_strrchr(void);
 Suite *suite_strstr(void);
 Suite *suite_strtok(void);
-//Suite *suite_stcspn(void);
+Suite *suite_strcspn(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase);

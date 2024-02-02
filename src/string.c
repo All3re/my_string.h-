@@ -101,20 +101,19 @@ char* s21_strncpy(char *dest, const char *src, size_t n){
 }
 
 s21_size_t s21_strcspn(const char *str1, const char *str2){
-    s21_size_t i;
-    s21_size_t j;
-    s21_size_t ds = 0;
-    for (i = 0; i < s21_strlen(str1); i++)
-        for (j = 0; j < s21_strlen(str2); j++)
-            if (str1[i] == str2[j]) {
-                if(ds == 0){
-                    ds = i;
-                    break;
-                }
-                else continue;
+    s21_size_t res = 0;
+    for (; *str1; str1++){
+        s21_size_t flag = 0;
+        for(char* de = (char*)str2; *de; de++){
+            if(*str1 == *de){
+                flag = 1;
+                break;
             }
-    if(ds == 0) ds = i;
-    return ds;
+        }
+        if(flag) break;
+        else res++;
+    }
+    return res;
 }
 
 char* s21_strpbrk(const char *str1, const char *str2){
