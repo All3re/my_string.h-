@@ -2,9 +2,25 @@
 #define SRC_S21_STRING_H_
 
 #include <stdio.h>
+#include <stdarg.h>
+#include <math.h>
 #define s21_NULL (void*)0
 
 typedef unsigned long s21_size_t;
+
+typedef struct {
+    int minus;
+    int plus;
+    int space;
+    int width;
+    int precision_set;
+    int precision;
+    int zero;
+    int h;
+    int l;
+    char specifier;
+} elements;
+
 
 void* s21_memchr(const void* str, int c, s21_size_t n);
 int s21_memcmp(const void *str1, const void *str2, size_t n);
