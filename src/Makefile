@@ -9,14 +9,15 @@ all: clean gcov_report
 
 s21_string.a:
 	$(CC) $(FLAG_ER) $(FLAG_C) string.c
-	ar rc s21_string.a string.o
+	$(CC) $(FLAG_ER) $(FLAG_C) strerror.c
+	ar rc s21_string.a string.o strerror.o
 	ranlib s21_string.a
 
 test: s21_string.a
 	$(CC) $(FLAG_ER) $(FLAG_C) test.c main.c 
 	ar rc suite.a test.o
 	ranlib suite.a
-	$(CC) $(FLAG_ER) $(FLAG_COV) $(FLAG_O) test s21_string.a suite.a string.c main.o test.o -lcheck -lrt -lm -lsubunit -lpthread
+	$(CC) $(FLAG_ER) $(FLAG_COV) $(FLAG_O) test s21_string.a suite.a string.c strerror.c main.o test.o -lcheck -lrt -lm -lsubunit -lpthread
 	./test
 
 gcov_report: test

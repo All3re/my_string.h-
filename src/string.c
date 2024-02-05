@@ -204,36 +204,3 @@ char* s21_strtok(char *str, const char *delim){
     return str;
 }
 
-void s21_f_to_buf(char* str, elements param, char format, va_list *arguments) {
-    long double num = 0;
-    int i = 0;
-    num = va_arg(*arguments, double);
-    /* надо посчитать длину дабла с учетом ширины и точности*/
-    s21_size_t size = str_double(param, num);
-}
-
-s21_size_t str_double(elements p, long double num){
-    s21_size_t res = 0;
-    long double in = 0;
-    long double frac = modfl(num, &in);
-    int prec = p.precision;
-    if(frac + 0.000000000000001 >= 1) {
-        frac = 0;
-        in += 1;
-    }
-    for(int i = 0; i < 15; i++){
-        frac *= 10;
-        if((long)frac != 0) break;
-    }
-    if(!prec && frac * 10 > 4) in += 1;
-    while(prec > 0){
-        frac *= 10;
-        prec--;
-    }
-    if(fmodl(fabsl(frac) * 10, 10.0) > 4) frac = roundl(frac);
-    int flag_dot = 0;
-    if((long)frac == 0) flag_dot = 1;
-    /* надо сделать строку из frac и in*/
-
-    /* надо обработать флаги */
-}
